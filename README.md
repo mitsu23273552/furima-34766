@@ -1,24 +1,60 @@
-# README
+## users テーブル
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| last_name           | string | null: false               |
+| first_name          | string | null: false               |
+| last_name_kana      | string | null: false               |
+| first_name_kana     | string | null: false               |
+| birthday            | date   | null: false               |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+has_many :items
+has_many :rops
 
-Things you may want to cover:
 
-* Ruby version
+## items テーブル
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | references | null: false, foreign_key: true |
+| title              | string     | null: false                    |
+| item_comment       | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| item_quality_id    | integer    | null: false                    |
+| delivery_fee_id    | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| delivery_day_id    | integer    | null: false                    |
 
-* System dependencies
+### Association
+belongs_to :user
+has_one :rop
 
-* Configuration
 
-* Database creation
+## to_addresses テーブル
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| rop                 | references | null: false, foreign_key: true |
+| to_postal_code      | string     | null: false                    |
+| prefecture_id       | string     | null: false                    |
+| to_city             | string     | null: false                    |
+| to_address1         | string     | null: false                    |
+| to_address2         | string     |                                |
+| to_telephone_number | string     | null: false                    |
 
-* Database initialization
+### Association
+belongs_to :rop
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## rops テーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
-* Deployment instructions
-
-* ...
+### Association
+belongs_to :user
+belongs_to :item
+has_one :to_address
