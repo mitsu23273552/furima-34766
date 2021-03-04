@@ -21,7 +21,7 @@ has_many :rops
 | user               | references | null: false, foreign_key: true |
 | title              | string     | null: false                    |
 | item_comment       | text       | null: false                    |
-| category           | string     | null: false                    |
+| category_id        | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | item_quality_id    | integer    | null: false                    |
 | delivery_fee_id    | integer    | null: false                    |
@@ -30,24 +30,22 @@ has_many :rops
 
 ### Association
 belongs_to :user
-has_one :rops
+has_one :rop
 
 
 ## to_addresses テーブル
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
-| user                | references | null: false, foreign_key: true |
-| item                | references | null: false, foreign_key: true |
+| rop                 | references | null: false, foreign_key: true |
 | to_postal_code      | integer    | null: false                    |
 | to_prefecture       | string     | null: false                    |
 | to_city             | string     | null: false                    |
 | to_address1         | string     | null: false                    |
 | to_address2         | string     |                                |
-| to_telephone_number | integer    | null: false                    |
+| to_telephone_number | string     | null: false                    |
 
 ### Association
-belongs_to :user
-has_one :item
+belongs_to :rop
 
 
 ## rops テーブル
@@ -58,4 +56,5 @@ has_one :item
 
 ### Association
 belongs_to :user
-has_one :item
+belongs_to :item
+has_one :to_address
