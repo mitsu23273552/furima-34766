@@ -1,12 +1,12 @@
 ## users テーブル
-| Column    | Type   | Options     |
-| --------- | ------ | ----------- |
-| nickname  | string | null: false |
-| email     | string | null: false |
-| password  | string | null: false |
-| name      | string | null: false |
-| name_kana | string | null: false |
-| birthday  | date   | null: false |
+| Column    | Type   | Options                   |
+| --------- | ------ | ------------------------- |
+| nickname  | string | null: false               |
+| email     | string | null: false, unique: true |
+| password  | string | null: false               |
+| name      | string | null: false               |
+| name_kana | string | null: false               |
+| birthday  | date   | null: false               |
 
 ### Association
 has_many :items
