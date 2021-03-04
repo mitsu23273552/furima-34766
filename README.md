@@ -1,36 +1,36 @@
 ## users テーブル
-| Column    | Type   | Options                   |
-| --------- | ------ | ------------------------- |
-| nickname  | string | null: false               |
-| email     | string | null: false, unique: true |
-| password  | string | null: false               |
-| name      | string | null: false               |
-| name_kana | string | null: false               |
-| birthday  | date   | null: false               |
+| Column              | Type   | Options                   |
+| ------------------- | ------ | ------------------------- |
+| nickname            | string | null: false               |
+| email               | string | null: false, unique: true |
+| encrypted_password  | string | null: false               |
+| last_name           | string | null: false               |
+| first_name          | string | null: false               |
+| last_name_kana      | string | null: false               |
+| first_name_kana     | string | null: false               |
+| birthday            | date   | null: false               |
 
 ### Association
 has_many :items
-has_many :to_addresses
 has_many :rops
 
 
 ## items テーブル
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| user            | references | null: false, foreign_key: true |
-| title           | string     | null: false                    |
-| comment         | text       | null: false                    |
-| category        | string     | null: false                    |
-| price           | integer    | null: false                    |
-| item_quality    | string     | null: false                    |
-| delivery_fee    | string     | null: false                    |
-| from_prefecture | string     | null: false                    |
-| delivery_days   | string     | null: false                    |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | references | null: false, foreign_key: true |
+| title              | string     | null: false                    |
+| item_comment       | text       | null: false                    |
+| category           | string     | null: false                    |
+| price              | integer    | null: false                    |
+| item_quality_id    | integer    | null: false                    |
+| delivery_fee_id    | integer    | null: false                    |
+| from_prefecture_id | integer    | null: false                    |
+| delivery_days_id   | integer    | null: false                    |
 
 ### Association
 belongs_to :user
-has_one :to_address
-has_one :messages
+has_one :rops
 
 
 ## to_addresses テーブル
