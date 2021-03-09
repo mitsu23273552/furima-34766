@@ -5,14 +5,21 @@ class Item < ApplicationRecord
     self.image.attached?
   end
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :item_quality
+  belongs_to :delivery_fee
+  belongs_to :prefecture
+  belongs_to :delivery_day
+
   with_options presence: true do
     validates :title
     validates :item_comment
-    validates :category_id
+    validates :category_id, numericality: { other_than: 1 } 
     validates :price
-    validates :item_quality_id
-    validates :delivery_fee_id
-    validates :prefecture_id
-    validates :delivery_day_id
+    validates :item_quality_id, numericality: { other_than: 1 } 
+    validates :delivery_fee_id, numericality: { other_than: 1 } 
+    validates :prefecture_id, numericality: { other_than: 1 } 
+    validates :delivery_day_id, numericality: { other_than: 1 } 
   end
 end
