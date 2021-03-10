@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
   def was_attached?
-    image.attached?
+    self.image.attached?
   end
 
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -18,7 +18,7 @@ class Item < ApplicationRecord
     validates :image
     validates :price, numericality: {
       greater_than_or_equal_to: 300,
-      less_than_or_equal_to: 9_999_999,
+      less_than_or_equal_to: 9999999,
       only_integer: true
     }
     with_options numericality: { other_than: 1 } do
