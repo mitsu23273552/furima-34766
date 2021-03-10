@@ -68,10 +68,16 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
-      it '価格が数字以外だと保存できないこと' do
+      it '価格が半角数字以外だと保存できないこと' do
         @item.price = 'テスト'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it '数値が小数を含むと保存できないこと' do
+        @item.price = '500.5'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price must be an integer")
       end
 
       it '価格が300円未満だと保存できないこと' do
