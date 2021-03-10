@@ -15,15 +15,17 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :title
     validates :item_comment
-    validates :category_id, numericality: { other_than: 1 } 
     validates :price, numericality: {
       greater_than_or_equal_to: 300,
       less_than_or_equal_to: 9999999,
       only_integer: true
     }
-    validates :item_quality_id, numericality: { other_than: 1 } 
-    validates :delivery_fee_id, numericality: { other_than: 1 } 
-    validates :prefecture_id, numericality: { other_than: 1 } 
-    validates :delivery_day_id, numericality: { other_than: 1 } 
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
+      validates :item_quality_id
+      validates :delivery_fee_id
+      validates :prefecture_id
+      validates :delivery_day_id
+    end
   end
 end

@@ -74,7 +74,25 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price is not a number")
       end
 
-      it '数値が小数を含むと保存できないこと' do
+      it '価格が全角文字では保存できないこと' do
+        @item.price = '５５５５５'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it '価格が半角英数字混合では保存できないこと' do
+        @item.price = '5test5'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it '価格が半角英字では保存できないこと' do
+        @item.price = 'test'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it '価格が小数を含むと保存できないこと' do
         @item.price = '500.5'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be an integer")
