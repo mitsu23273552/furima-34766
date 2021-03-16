@@ -42,7 +42,7 @@ has_one :rop
 | to_city             | string     | null: false                    |
 | to_address1         | string     | null: false                    |
 | to_address2         | string     |                                |
-| to_telephone_number | integer    | null: false                    |
+| to_telephone_number | string     | null: false                    |
 
 ### Association
 belongs_to :rop
