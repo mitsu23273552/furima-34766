@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_031528) do
+ActiveRecord::Schema.define(version: 2021_03_15_110239) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,28 @@ ActiveRecord::Schema.define(version: 2021_03_08_031528) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "rops", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_rops_on_item_id"
+    t.index ["user_id"], name: "index_rops_on_user_id"
+  end
+
+  create_table "to_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "rop_id"
+    t.string "to_postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "to_city", null: false
+    t.string "to_address1", null: false
+    t.string "to_address2"
+    t.integer "to_telephone_number", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["rop_id"], name: "index_to_addresses_on_rop_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -68,4 +90,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_031528) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "rops", "items"
+  add_foreign_key "rops", "users"
+  add_foreign_key "to_addresses", "rops"
 end
