@@ -22,24 +22,24 @@ class RopsController < ApplicationController
   private
 
   def rop_params
-    params.require(:rop_to_address).permit(:to_postal_code, :prefecture_id, :to_city, :to_address1, :to_address2, :to_telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:rop_to_address).permit(:to_postal_code, :prefecture_id, :to_city, :to_address1, :to_address2, :to_telephone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
     @item = Item.find(params[:item_id])
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
-      card: rop_params[:token],    # カードトークン
+      card: rop_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
   end
 
   def item_user_check
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id == @item.user_id
   end
 
   def rop_check

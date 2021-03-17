@@ -48,13 +48,13 @@ RSpec.describe RopToAddress, type: :model do
       it 'to_postal_codeがハイフンを含んだ正しい形式でないと保存できないこと' do
         @rop_to_address.to_postal_code = '1234567'
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("To postal code is invalid. Include hyphen(-)")
+        expect(@rop_to_address.errors.full_messages).to include('To postal code is invalid. Include hyphen(-)')
       end
 
       it 'prefectureを選択していないと保存できないこと' do
         @rop_to_address.prefecture_id = 1
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@rop_to_address.errors.full_messages).to include('Prefecture must be other than 1')
       end
 
       it 'to_cityが空だと保存できないこと' do
@@ -75,24 +75,24 @@ RSpec.describe RopToAddress, type: :model do
         expect(@rop_to_address.errors.full_messages).to include("To telephone number can't be blank")
       end
       it 'to_telephone_numberが全角数字だと保存できないこと' do
-        @rop_to_address.to_telephone_number = "０９０１２３４５６７８"
+        @rop_to_address.to_telephone_number = '０９０１２３４５６７８'
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("To telephone number is invalid")
+        expect(@rop_to_address.errors.full_messages).to include('To telephone number is invalid')
       end
       it 'to_telephone_numberが半角英数字混合だと保存できないこと' do
-        @rop_to_address.to_telephone_number = "090abcd5678"
+        @rop_to_address.to_telephone_number = '090abcd5678'
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("To telephone number is invalid")
+        expect(@rop_to_address.errors.full_messages).to include('To telephone number is invalid')
       end
       it 'to_telephone_numberが半角英字だと保存できないこと' do
-        @rop_to_address.to_telephone_number = "abcdefghij"
+        @rop_to_address.to_telephone_number = 'abcdefghij'
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("To telephone number is invalid")
+        expect(@rop_to_address.errors.full_messages).to include('To telephone number is invalid')
       end
       it 'to_telephone_numberが12桁以上だと保存できないこと' do
-        @rop_to_address.to_telephone_number = "090123456789"
+        @rop_to_address.to_telephone_number = '090123456789'
         @rop_to_address.valid?
-        expect(@rop_to_address.errors.full_messages).to include("To telephone number is too long (maximum is 11 characters)")
+        expect(@rop_to_address.errors.full_messages).to include('To telephone number is too long (maximum is 11 characters)')
       end
     end
   end
