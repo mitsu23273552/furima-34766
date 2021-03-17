@@ -7,7 +7,7 @@ class CreateToAddresses < ActiveRecord::Migration[6.0]
       t.string :to_city,              null: false
       t.string :to_address1,          null: false
       t.string :to_address2
-      t.integer :to_telephone_number,  null: false
+      t.string :to_telephone_number,  null: false
       t.timestamps
     end
   end
