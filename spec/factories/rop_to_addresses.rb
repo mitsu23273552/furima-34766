@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :rop_to_address do
-    association :item
-    association :user
     token { 'tok_abcdefghijk00000000000000000' }
     to_postal_code { '111-1111' }
     prefecture_id { Faker::Number.between(from: 2, to: 48) }

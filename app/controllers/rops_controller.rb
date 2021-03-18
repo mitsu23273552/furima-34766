@@ -1,7 +1,7 @@
 class RopsController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
-  before_action :item_user_check, only: [:index]
-  before_action :rop_check, only: [:index]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :item_user_check, only: [:index, :create]
+  before_action :rop_check, only: [:index, :create]
 
   def index
     @rop_to_address = RopToAddress.new
@@ -14,7 +14,6 @@ class RopsController < ApplicationController
       @rop_to_address.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -28,7 +27,6 @@ class RopsController < ApplicationController
   end
 
   def pay_item
-    @item = Item.find(params[:item_id])
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
