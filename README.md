@@ -38,7 +38,7 @@ has_one :rop
 | ------------------- | ---------- | ------------------------------ |
 | rop                 | references | null: false, foreign_key: true |
 | to_postal_code      | string     | null: false                    |
-| prefecture_id       | string     | null: false                    |
+| prefecture_id       | integer    | null: false                    |
 | to_city             | string     | null: false                    |
 | to_address1         | string     | null: false                    |
 | to_address2         | string     |                                |
