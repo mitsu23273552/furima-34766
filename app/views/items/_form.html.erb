@@ -137,7 +137,7 @@
     <%# /注意書き %>
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
-      <% if @item.title.present? %>
+      <% if controller.action_name == "edit" %>
         <%= f.submit "変更する" ,class:"sell-btn" %>
         <%= link_to 'もどる', item_path(@item.id), class:"back-btn" %>
       <% else %>
